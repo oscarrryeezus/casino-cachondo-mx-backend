@@ -1,0 +1,23 @@
+{
+  "name": "casino-cachondo-mx-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscarrryeezus/casino-cachondo-mx-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/oscarrryeezus/casino-cachondo-mx-backend/issues"
+  },
+  "homepage": "https://github.com/oscarrryeezus/casino-cachondo-mx-backend#readme"
+}
