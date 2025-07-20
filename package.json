@@ -8,6 +8,32 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "@sendgrid/mail": "^8.1.4",
+    "express": "^4.19.2",
+    "express-handlebars": "^8.0.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.6.0",
+    "morgan": "^1.10.1",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^4.1.1",
+    "nodemailer": "^6.9.15",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "winston": "^3.17.0",
+    "xss-clean": "^0.1.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oscarrryeezus/casino-cachondo-mx-backend.git"
@@ -19,5 +45,10 @@
   "bugs": {
     "url": "https://github.com/oscarrryeezus/casino-cachondo-mx-backend/issues"
   },
-  "homepage": "https://github.com/oscarrryeezus/casino-cachondo-mx-backend#readme"
+  "homepage": "https://github.com/oscarrryeezus/casino-cachondo-mx-backend#readme",
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "npm-check-updates": "^17.1.0"
+  }
 }
