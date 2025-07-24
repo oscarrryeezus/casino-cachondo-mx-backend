@@ -7,4 +7,10 @@ router.use(cors());
 router.use(bodyparser.json());
 router.use(bodyparser.urlencoded({ extended: true }));
 
+const roulette_routes = require('./routes/roulette.routes')
+const usuario_routes = require('./routes/user.routes')
+
+router.use('/roulette', roulette_routes);
+router.use('/usuario', usuario_routes)
+
 module.exports = router;

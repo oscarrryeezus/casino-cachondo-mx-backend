@@ -64,8 +64,8 @@ const UserSchema = new mongoose.Schema({
         match: [
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,:;#^_~\-+])[A-Za-z\d@$!%*?&.,:;#^_~\-+]{8,}$/,
             'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, un número y un símbolo especial'
-        ]
-
+        ],
+        select: false
     },
     fondos: {
         type: Number,
