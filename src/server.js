@@ -12,12 +12,22 @@ require("dotenv").config();
 
 const URL_CONNECT = process.env.URL_CONNECT;
 const PORT = process.env.PORT;
+const URL_FRONTEND = process.env.URL_FONTEND;
+
+const corsOptions = {
+    origin: URL_FRONTEND,
+    credentials: true,
+};
+
+const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
 app.disable('x-powered-by');
+app.use(morgan('dev'));
+app.use(cookieParser());
 
 app.use(express.json());
 
@@ -33,7 +43,7 @@ db.on('error', (error) => {
 
 db.once('open', () => {
     console.log('connection successfully'); 
-    app.use(cors());
+    app.use(cors(corsOptions));
     app.use('/api', require('./router/index.js'));
     app.listen(PORT, () => {
         console.log(`server mounted on port: ${PORT}`);
