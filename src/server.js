@@ -15,8 +15,7 @@ const PORT = process.env.PORT;
 const URL_FRONTEND = process.env.FRONTEND_URL;
 
 const corsOptions = {
-    origin: URL_FRONTEND,
-    credentials: true,
+    origin: '*'
 };
 
 const cookieParser = require('cookie-parser');
