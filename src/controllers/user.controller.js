@@ -15,7 +15,6 @@ const user_controller = {
         }
     },
 
-feature-saldo-back
     addCard: async (req, res) => {
     try {
         const { numero, mm, yyyy, cvv } = req.body;
@@ -61,8 +60,7 @@ feature-saldo-back
         error: error.message
       });
     }
-  }
-}
+  },
 
 
   getCards: async (req, res) => {
