@@ -12,7 +12,7 @@ require("dotenv").config();
 
 const URL_CONNECT = process.env.URL_CONNECT;
 const PORT = process.env.PORT;
-const URL_FRONTEND = process.env.URL_FONTEND;
+const URL_FRONTEND = process.env.FRONTEND_URL;
 
 const corsOptions = {
     origin: URL_FRONTEND,
