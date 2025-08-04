@@ -14,10 +14,22 @@ const URL_CONNECT = process.env.URL_CONNECT;
 const PORT = process.env.PORT;
 const URL_FRONTEND = process.env.FRONTEND_URL;
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://mifrontendcasinoprueba.canadacentral.azurecontainer.io:3000'
+];
+
 const corsOptions = {
-    origin: URL_FRONTEND,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 };
+
 app.use(cors(corsOptions));
 
 const cookieParser = require('cookie-parser');
