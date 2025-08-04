@@ -34,7 +34,10 @@
     "path": "^0.12.7",
     "uuid": "^11.1.0",
     "winston": "^3.17.0",
-    "xss-clean": "^0.1.4"
+    "xss-clean": "^0.1.4",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "npm-check-updates": "^17.1.0"
   },
   "repository": {
     "type": "git",
@@ -49,8 +52,6 @@
   },
   "homepage": "https://github.com/oscarrryeezus/casino-cachondo-mx-backend#readme",
   "devDependencies": {
-    "dotenv": "^16.4.5",
-    "nodemon": "^3.1.4",
-    "npm-check-updates": "^17.1.0"
+    
   }
 }
