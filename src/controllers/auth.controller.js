@@ -57,30 +57,5 @@ const logout = (req, res) => {
     .json({ message: 'Sesión cerrada' });
 };
 
-const validation = async (req, res, next) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) {
-      return res.status(401).json({ message: 'No autenticado' });
-    }
 
-    const payload = jwt.verify(token, JWT_SECRET);
-    const user = await User.findById(payload.id).select('-password');
-    
-    if (!user) {
-      return res.status(401).json({ message: 'Usuario no encontrado' });
-    }
-
-    res.status(200).json({ user });
-  } catch (err) {
-    if (err instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({ message: 'Token expirado' });
-    }
-    if (err instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ message: 'Token inválido' });
-    }
-    res.status(500).json({ message: 'Error del servidor' });
-  }
-};
-
-module.exports = {login, logout, validation}
+module.exports = {login, logout}
