@@ -18,7 +18,8 @@ const corsOptions = {
     origin: URL_FRONTEND,
     credentials: true
 };
- 
+app.use(cors(corsOptions));
+
 const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json());
@@ -42,8 +43,7 @@ db.on('error', (error) => {
 })
 
 db.once('open', () => {
-    console.log('connection successfully'); 
-    app.use(cors(corsOptions));
+    console.log('connection successfully');
     app.use('/api', require('./router/index.js'));
     app.listen(PORT, () => {
         console.log(`server mounted on port: ${PORT}`);
