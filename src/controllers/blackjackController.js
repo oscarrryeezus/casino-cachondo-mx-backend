@@ -8,40 +8,38 @@ const jugarBlackjack = async (req, res) => {
   }
 
   try {
-    const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+    const monto = resultado === 'ganado'
+      ? apuesta
+      : resultado === 'perdido'
+      ? -apuesta
+      : 0;
 
-    if (user.fondos < apuesta && resultado === 'perdido') {
-      return res.status(400).json({ message: 'Fondos insuficientes.' });
+    if (monto < 0) {
+      const { fondos } = await User.findById(userId).select('fondos');
+      if (fondos < apuesta) {
+        return res.status(400).json({ message: 'Fondos insuficientes.' });
+      }
     }
 
-    let nuevosFondos = user.fondos;
+    const userActualizado = await User.findByIdAndUpdate(
+      userId,
+      {
+        $inc: { fondos: monto },
+        $push: {
+          historial: {
+            juego: 'blackjack',
+            monto: monto
+          }
+        }
+      },
+      { new: true }
+    );
 
-    if (resultado === 'ganado') {
-      nuevosFondos += apuesta;
-    } else if (resultado === 'perdido') {
-      nuevosFondos -= apuesta;
+    if (!userActualizado) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    user.fondos = nuevosFondos;
-
-let montoHistorial = 0;
-
-if (resultado === 'ganado') {
-  montoHistorial = apuesta;
-} else if (resultado === 'perdido') {
-  montoHistorial = -apuesta;
-}
-
-user.historial.push({
-  juego: 'blackjack',
-  monto: montoHistorial
-});
-
-
-    await user.save();
-
-    return res.json({ fondos: user.fondos });
+    return res.json({ fondos: userActualizado.fondos });
   } catch (err) {
     console.error('Error en jugarBlackjack:', err);
     return res.status(500).json({ message: 'Error en el servidor', error: err.message });
