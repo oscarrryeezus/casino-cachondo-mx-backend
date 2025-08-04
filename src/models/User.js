@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
 const TarjetaSchema = new mongoose.Schema({
+    id: { type: String, required: true, unique: true },
     numero: {
         type: String,
         required: true
@@ -27,6 +28,17 @@ const TarjetaSchema = new mongoose.Schema({
 
 const HistorialSchema = new mongoose.Schema({
     juego: {
+        type: String,
+        required: true
+    },
+    monto: {
+        type: Number,
+        required: true
+    }
+}, { _id: false })
+
+const HistorialDepositoSchema = new mongoose.Schema({
+    tipo: {
         type: String,
         required: true
     },
@@ -72,7 +84,8 @@ const UserSchema = new mongoose.Schema({
         default: 0
     },
     tarjetas: [TarjetaSchema],
-    historial: [HistorialSchema]
+    historial: [HistorialSchema],
+    historialD: [HistorialDepositoSchema]
 }, { timestamps: true, versionKey: false })
 
 UserSchema.pre('save', async function (next) {
