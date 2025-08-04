@@ -17,7 +17,7 @@ const URL_FRONTEND = process.env.FRONTEND_URL;
 const corsOptions = {
     origin: '*'
 };
-
+ 
 const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json());
