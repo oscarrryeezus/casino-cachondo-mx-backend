@@ -15,6 +15,7 @@ const user_controller = {
         }
     },
 
+feature-saldo-back
     addCard: async (req, res) => {
     try {
         const { numero, mm, yyyy, cvv } = req.body;
@@ -42,6 +43,28 @@ const user_controller = {
     }
     },
 
+
+  getUserFundsById: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const user = await modelo.findById(id).select('fondos');
+
+      if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      res.status(200).json({ fondos: user.fondos });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Error al obtener los fondos',
+        error: error.message
+      });
+    }
+  }
+}
+
+
   getCards: async (req, res) => {
     try {
       const userId = req.user.id;
@@ -68,5 +91,6 @@ const user_controller = {
     }
   }
 }
+
 
 module.exports = user_controller;
