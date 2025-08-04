@@ -12,8 +12,29 @@ const user_controller = {
                 error: error.details
             })
         }
+    },
+
+
+  getUserFundsById: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const user = await modelo.findById(id).select('fondos');
+
+      if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      res.status(200).json({ fondos: user.fondos });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Error al obtener los fondos',
+        error: error.message
+      });
     }
+  }
 }
+
 
 
 
