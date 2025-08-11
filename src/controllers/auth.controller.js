@@ -3,6 +3,7 @@ const User = require('../models/User');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = '7d';
+const isProduction = process.env.NODE_ENV === "production";
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -23,6 +24,7 @@ const login = async (req, res, next) => {
       { expiresIn: JWT_EXPIRES_IN }
     );
 
+
     res
       .cookie('token', token, {
         httpOnly: true,
@@ -31,8 +33,10 @@ const login = async (req, res, next) => {
         maxAge: 7 * 24 * 60 * 60 * 1000 
       })
       .status(200)
+
       .json({
         message: 'Autenticación exitosa',
+        token,
         user: {
           id: user._id,
           nombre: user.nombre,

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
 const TarjetaSchema = new mongoose.Schema({
-    id: { type: String, required: true, unique: true },
+    id: { type: String},
     numero: {
         type: String,
         required: true

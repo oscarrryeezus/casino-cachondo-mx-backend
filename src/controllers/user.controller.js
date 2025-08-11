@@ -2,18 +2,24 @@ const User = require('../models/User')
 const { v4: uuidv4 } = require('uuid');
 
 const user_controller = {
-    createUser: async (req, res) => {
-        try {
-            const usuario = new User(req.body)
-            const usuarioCreated = await usuario.save();
-                res.status(200).json({usuarioCreated, message: "Usuario creado exitosamente"})
-        } catch (error) {
-            res.status(500).json({
-                message: "Error al crear el usuario",
-                error: error.details
-            })
-        }
-    },
+  createUser: async (req, res) => {
+    try {
+      const usuario = new User(req.body);
+      const usuarioCreated = await usuario.save();
+      res.status(200).json({ usuarioCreated, message: "Usuario creado exitosamente" });
+    } catch (error) {
+      console.error("Error al crear el usuario:", {
+        message: error.message,
+        stack: error.stack,
+        errorCompleto: error,
+      });
+      res.status(500).json({
+        message: "Error al crear el usuario",
+        error: error.message,
+        stack: error.stack
+      });
+    }
+  },
 
     addCard: async (req, res) => {
     try {
@@ -61,7 +67,6 @@ const user_controller = {
       });
     }
   },
-
 
 
   getCards: async (req, res) => {

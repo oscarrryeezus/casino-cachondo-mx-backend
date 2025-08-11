@@ -12,12 +12,25 @@ require("dotenv").config();
 
 const URL_CONNECT = process.env.URL_CONNECT;
 const PORT = process.env.PORT;
-const URL_FRONTEND = process.env.URL_FONTEND;
+const URL_FRONTEND = process.env.FRONTEND_URL;
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://mifrontendcasinoprueba.canadacentral.azurecontainer.io:3000'
+];
 
 const corsOptions = {
-    origin: URL_FRONTEND,
-    credentials: true,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
 };
+
+app.use(cors(corsOptions));
 
 const cookieParser = require('cookie-parser');
 
@@ -42,8 +55,7 @@ db.on('error', (error) => {
 })
 
 db.once('open', () => {
-    console.log('connection successfully'); 
-    app.use(cors(corsOptions));
+    console.log('connection successfully');
     app.use('/api', require('./router/index.js'));
     app.listen(PORT, () => {
         console.log(`server mounted on port: ${PORT}`);
