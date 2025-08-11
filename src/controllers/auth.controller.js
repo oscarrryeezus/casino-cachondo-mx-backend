@@ -24,7 +24,16 @@ const login = async (req, res, next) => {
       { expiresIn: JWT_EXPIRES_IN }
     );
 
-    res.status(200)
+
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000 
+      })
+      .status(200)
+
       .json({
         message: 'Autenticación exitosa',
         token,

@@ -73,10 +73,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'La contraseña es requerida'],
         minLength: [8, 'La contraseña debe tener al menos 8 caracteres'],
-        match: [
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,:;#^_~\-+])[A-Za-z\d@$!%*?&.,:;#^_~\-+]{8,}$/,
-            'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, un número y un símbolo especial'
-        ],
         select: false
     },
     fondos: {
@@ -103,4 +99,4 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password)
 }
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.models.User || mongoose.model('User', UserSchema)
